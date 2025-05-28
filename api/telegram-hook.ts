@@ -5,6 +5,7 @@ import { Telegraf } from "telegraf";
 const BOT_TOKEN = process.env.BOT_TOKEN; // Replace with your bot token
 const SECRET_HASH = "32e58fbahey833349df3383dc910e180"; // Replace with your own secret hash
 //api.telegram.org/bot{token}/setWebhook?url={url}/api/telegram-hook?secret_hash=32e58fbahey833349df3383dc910e180
+//api.telegram.org/bot8135978286:AAHhB22gF9At_pvqFoqEf6OIg-oQWNVcSWQ/setWebhook?url=https://mobile-proxies.vercel.app/api/telegram-hook?secret_hash=32e58fbahey833349df3383dc910e180
 
 // Initialize the bot
 const bot = new Telegraf(BOT_TOKEN);
@@ -13,7 +14,7 @@ const bot = new Telegraf(BOT_TOKEN);
 export async function handleStartCommand(ctx) {
   const COMMAND = "/start";
   const { message } = ctx;
-  const channelUrl = "t.me/redps_proxies"
+  const channelUrl = "t.me/hq_proxies"
 
   // Welcome message with Markdown formatting
   const reply = `
