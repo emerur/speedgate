@@ -14,20 +14,28 @@ const bot = new Telegraf(BOT_TOKEN);
 export async function handleStartCommand(ctx) {
   const COMMAND = "/start";
   const { message } = ctx;
-  const channelUrl = "t.me/hq_proxies"
+  const channelUrl = "t.me/unlimited_proxie"
 
   // Welcome message with Markdown formatting
   const reply = `
-  🔥 Supercharge Your Proxy Power — 100% FREE! 🔥
-Say goodbye to limits. Get instant access to Residential Socks5 & Mobile Proxies — no trials, no payments, just pure performance.
+  🚨 BINARY TRADING INSIDER ACCESS 🚨
 
-🌍 30M+ Verified Clean IPs — zero fraud, zero hassle
-📍 Pinpoint Geo-Targeting — rule any region, anytime
-⚡ Blazing 4G Speeds — fast, stable, unstoppable
-🖥️ RDPs Launching Soon — your next-level toolkit is coming
+FREE for 48 HOURS ONLY:
+🔥 Pro Strategies That Work
+🔥 Live Market Signal Breakdowns
+🔥 Risk Management Masterclass
 
-🚀 Don’t wait. Join the channel now:
-🔗 [Tap to join Mobile Proxies](${channelUrl})
+📈 JOIN 12,000+ TRADERS LEARNING:
+👉 [Tap Here for Instant Access](${channelUrl})
+
+⚠️ WARNING: Trading involves 100% risk of loss. This is education only - we never guarantee profits.
+
+💎 FIRST 200 GET:
+✅ "The 5-Minute Profit System" (PDF)
+✅ Exclusive webinar invite
+
+"The market rewards the educated - are you in or out?"
+🔗 [Tap to Join Now](${channelUrl})
 `;
 
   try {
@@ -37,7 +45,7 @@ Say goodbye to limits. Get instant access to Residential Socks5 & Mobile Proxies
     inline_keyboard: [
       [
         {
-          text: "🚀 Join Mobile Proxies Channel Now!",
+          text: "🚀 Tap Here for Instant Access Now!",
           url: channelUrl
         },
       ],
