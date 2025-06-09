@@ -3,7 +3,7 @@ import { Telegraf } from "telegraf";
 
 // Environment variables
 const BOT_TOKEN = process.env.BOT_TOKEN; // Replace with your bot token
-const SECRET_HASH = "32e58fbahey833349df3383dc910e180"; // Replace with your own secret hash
+const SECRET_HASH = "32e58fbahey833349df3383dc910e18ok"; // Replace with your own secret hash
 //api.telegram.org/bot{token}/setWebhook?url={url}/api/telegram-hook?secret_hash=32e58fbahey833349df3383dc910e180
 //api.telegram.org/bot{token}/setWebhook?url=https://mobile-proxies.vercel.app/api/telegram-hook?secret_hash=32e58fbahey833349df3383dc910e180
 
@@ -14,27 +14,20 @@ const bot = new Telegraf(BOT_TOKEN);
 export async function handleStartCommand(ctx) {
   const COMMAND = "/start";
   const { message } = ctx;
-  const channelUrl = "t.me/unlimited_proxie"
+  const channelUrl = "t.me/rddpsproxies"
 
   // Welcome message with Markdown formatting
   const reply = `
-  🚨 BINARY TRADING INSIDER ACCESS 🚨
+  🚨 PRIVATE BROWSING UNLOCKED 🚨
 
-FREE for 48 HOURS ONLY:
-🔥 Pro Strategies That Work
-🔥 Live Market Signal Breakdowns
-🔥 Risk Management Masterclass
+FREE ACCESS for a Limited Time:
+🔐 Top Free VPN Tools (No Signup Needed)
+🌍 Residential Proxies to Bypass Blocks
+⚙️ Step-by-Step Setup Guides
 
-📈 JOIN 12,000+ TRADERS LEARNING:
-👉 [Tap Here for Instant Access](${channelUrl})
+⚠️ DISCLAIMER: These tools are for educational and privacy-enhancing purposes only. We do not support illegal activity.
 
-⚠️ WARNING: Trading involves 100% risk of loss. This is education only - we never guarantee profits.
-
-💎 FIRST 200 GET:
-✅ "The 5-Minute Profit System" (PDF)
-✅ Exclusive webinar invite
-
-"The market rewards the educated - are you in or out?"
+📡 JOIN 10,000+ USERS SECURING THEIR CONNECTIONS:
 🔗 [Tap to Join Now](${channelUrl})
 `;
 
