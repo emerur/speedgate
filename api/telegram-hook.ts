@@ -14,7 +14,7 @@ export async function handleStartCommand(ctx) {
   const channelUrl = "https://t.me/rddpsproxies";
 
   const reply = `
-Welcome to ProxyPal Bot 👋
+Welcome to Limitless Bot 👋
 
 Here, you can explore a curated list of free VPN tools and residential proxy services to help you browse more privately and access region-restricted content.
 
