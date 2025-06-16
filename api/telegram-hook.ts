@@ -9,91 +9,89 @@ const bot = new Telegraf(BOT_TOKEN);
 
 // /start handler
 bot.start(async (ctx) => {
-  const reply = `
+  const welcomeMessage = `
 👋 *Welcome to Limitless Bot!*
 
-Explore the internet with speed, privacy, and control using trusted connection tools.
+Get access to secure, high-speed connection tools designed for performance and privacy.
 
-Please choose an option below to get started:
-`;
+Choose an option to get started:
+  `;
 
-  await ctx.reply(reply, {
+  await ctx.reply(welcomeMessage, {
     parse_mode: "Markdown",
     reply_markup: {
       inline_keyboard: [
-        [{ text: "📖 How It Works", callback_data: "how_it_works" }],
-        [{ text: "🛒 View Plans", callback_data: "view_plans" }],
-        [{ text: "🎁 Get Free Access", callback_data: "get_free" }],
+        [{ text: "📘 How It Works", callback_data: "how_it_works" }],
+        [{ text: "💼 View Access Plans", callback_data: "view_plans" }],
+        [{ text: "🎁 Try Free Sample", callback_data: "get_free" }],
         [{ text: "📞 Contact Support", callback_data: "contact_support" }],
       ],
     },
   });
 });
 
-// View plans
-bot.action("view_plans", async (ctx) => {
-  await ctx.answerCbQuery();
-  await ctx.reply(
-    `💼 *Limitless Plans*:
-
-🔹 *Basic* — \$5/month  
-   5 access points · 1 location
-
-🔹 *Pro* — \$10/month  
-   15 access points · Multi-region
-
-🔹 *Elite* — \$20/month  
-   50 access points · Global coverage
-
-All plans include setup support and 24/7 assistance.`,
-    { parse_mode: "Markdown" }
-  );
-});
-
 // How it works
 bot.action("how_it_works", async (ctx) => {
   await ctx.answerCbQuery();
-  await ctx.reply(
-    `🔧 *How It Works*:
+  const howItWorks = `
+🔧 *How Limitless Works*:
 
-1. Choose a plan  
-2. Get your secure access credentials  
-3. Plug them into your preferred tools or apps  
-4. Enjoy private, stable connectivity
+1. Choose a plan based on your needs  
+2. Receive your connection credentials instantly  
+3. Use with your preferred apps or tools  
+4. Enjoy stable, private, and optimized connectivity
 
-You’ll receive setup instructions instantly after signup.`,
-    { parse_mode: "Markdown" }
-  );
+*Simple setup. Full control.*
+  `;
+  await ctx.reply(howItWorks, { parse_mode: "Markdown" });
 });
 
-// Get Free Access (Sample)
+// View plans
+bot.action("view_plans", async (ctx) => {
+  await ctx.answerCbQuery();
+  const plans = `
+💼 *Limitless Access Plans*:
+
+🔹 *Basic* — \$5/month  
+   Access to 5 high-speed nodes
+
+🔹 *Pro* — \$10/month  
+   15 dynamic locations · Enhanced bandwidth
+
+🔹 *Elite* — \$20/month  
+   50+ nodes · Global reach · Priority support
+
+All plans include simple setup guides and 24/7 assistance.
+  `;
+  await ctx.reply(plans, { parse_mode: "Markdown" });
+});
+
+// Free trial
 bot.action("get_free", async (ctx) => {
   await ctx.answerCbQuery();
-  await ctx.reply(
-    `🎁 *Your Free Sample Access*:
+  const freeAccess = `
+🎁 *Free Trial Access*:
 
 \`\`\`
-Host: 149.56.23.129
-Port: 1080
-Username: free_trial
-Password: tryitnow
+Host: 149.56.23.129  
+Port: 1080  
+Username: demo_user  
+Password: limitless
 \`\`\`
 
-⚠️ This free sample is limited in speed and region.
+⚠️ Note: Trial access may have limited speed and availability.
 
-Unlock full speed and control by tapping *View Plans* above.`,
-    { parse_mode: "Markdown" }
-  );
+Want full power? Tap *View Access Plans* to upgrade.
+  `;
+  await ctx.reply(freeAccess, { parse_mode: "Markdown" });
 });
 
 // Contact support
 bot.action("contact_support", async (ctx) => {
   await ctx.answerCbQuery();
   await ctx.reply(
-    `📞 *Need Help?*
-
-Message our support team directly at:  
-👉 @TrevorDev`
+    `📞 *Need Help?*  
+Message our support team here: @TrevorDev`
   );
 });
 
@@ -102,19 +100,19 @@ export default async (req: VercelRequest, res: VercelResponse) => {
   try {
     const { body, query } = req;
 
-    // Webhook setup
+    // Set webhook
     if (query.setWebhook === "true") {
       const webhookUrl = `${process.env.VERCEL_URL}/api/telegram-hook?secret_hash=${SECRET_HASH}`;
       const isSet = await bot.telegram.setWebhook(webhookUrl);
-      console.log(`Webhook set to ${webhookUrl}: ${isSet}`);
+      console.log(`Webhook set: ${webhookUrl}`);
     }
 
-    // Process updates
+    // Handle updates
     if (query.secret_hash === SECRET_HASH) {
       await bot.handleUpdate(body);
     }
   } catch (error) {
-    console.error("Telegram Bot Error:", error.toString());
+    console.error("Bot Error:", error);
   }
 
   res.status(200).send("OK");
