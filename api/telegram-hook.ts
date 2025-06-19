@@ -9,22 +9,28 @@ const bot = new Telegraf(BOT_TOKEN);
 
 // /start handler
 bot.start(async (ctx) => {
-  const welcomeMessage = `
+  const reply = `
 👋 *Welcome to Limitless Bot!*
 
-Get access to secure, high-speed connection tools designed for performance and privacy.
+Explore a curated list of free VPN tools and residential proxy services to help you browse privately and access region-restricted content.
 
-Choose an option to get started:
-  `;
+🔐 Secure your connection  
+🌍 Discover proxy tools  
+📘 Learn how to use them safely
 
-  await ctx.reply(welcomeMessage, {
+_Disclaimer: This bot is for educational purposes only. We do not promote or support illegal activity. Please use responsibly and follow your local laws._
+
+Choose an option below to begin:
+`;
+
+  await ctx.reply(reply, {
     parse_mode: "Markdown",
     reply_markup: {
       inline_keyboard: [
-        [{ text: "📘 How It Works", callback_data: "how_it_works" }],
-        [{ text: "💼 View Access Plans", callback_data: "view_plans" }],
-        [{ text: "🎁 Try Free Sample", callback_data: "get_free" }],
-        [{ text: "📞 Contact Support", callback_data: "contact_support" }],
+        [{ text: "🔎 Learn How It Works", callback_data: "how_it_works" }],
+        [{ text: "🌍 Browse VPN & Proxy Tools", callback_data: "view_tools" }],
+        [{ text: "🎁 Get a Free Sample Proxy", callback_data: "get_free" }],
+        [{ text: "📬 Talk to Support", callback_data: "contact_support" }],
       ],
     },
   });
@@ -33,67 +39,67 @@ Choose an option to get started:
 // How it works
 bot.action("how_it_works", async (ctx) => {
   await ctx.answerCbQuery();
-  const howItWorks = `
-🔧 *How Limitless Works*:
+  await ctx.reply(
+    `📘 *How It Works*:
 
-1. Choose a plan based on your needs  
-2. Receive your connection credentials instantly  
-3. Use with your preferred apps or tools  
-4. Enjoy stable, private, and optimized connectivity
+1. Browse our curated list of VPN and proxy tools.
+2. Choose the tools that suit your needs (speed, country, anonymity).
+3. Follow the usage instructions provided.
+4. Stay secure and access blocked content safely.
 
-*Simple setup. Full control.*
-  `;
-  await ctx.reply(howItWorks, { parse_mode: "Markdown" });
+Always use these tools responsibly and legally.`,
+    { parse_mode: "Markdown" }
+  );
 });
 
-// View plans
-bot.action("view_plans", async (ctx) => {
+// View tools
+bot.action("view_tools", async (ctx) => {
   await ctx.answerCbQuery();
-  const plans = `
-💼 *Limitless Access Plans*:
+  await ctx.reply(
+    `🌐 *Free VPN & Proxy Tools*:
 
-🔹 *Basic* — \$5/month  
-   Access to 5 high-speed nodes
+🔸 ProtonVPN (https://protonvpn.com/free-vpn)  
+🔸 Psiphon (https://psiphon3.com)  
+🔸 Windscribe Free (https://windscribe.com)  
+🔸 Urban VPN (https://www.urban-vpn.com/)  
+🔸 Hide.me (https://hide.me/en/)  
 
-🔹 *Pro* — \$10/month  
-   15 dynamic locations · Enhanced bandwidth
-
-🔹 *Elite* — \$20/month  
-   50+ nodes · Global reach · Priority support
-
-All plans include simple setup guides and 24/7 assistance.
-  `;
-  await ctx.reply(plans, { parse_mode: "Markdown" });
+Note: We do not own or operate these services. Use at your discretion.`,
+    { parse_mode: "Markdown" }
+  );
 });
 
-// Free trial
+// Get Free Sample Proxy
 bot.action("get_free", async (ctx) => {
   await ctx.answerCbQuery();
-  const freeAccess = `
-🎁 *Free Trial Access*:
+  await ctx.reply(
+    `🎁 *Sample SOCKS5 Proxy for Testing:*  
 
 \`\`\`
-Host: 149.56.23.129  
-Port: 1080  
-Username: demo_user  
-Password: limitless
+Host: 149.56.23.129
+Port: 1080
+Username: free_trial
+Password: tryitnow
 \`\`\`
 
-⚠️ Note: Trial access may have limited speed and availability.
+⚠️ This is for educational/demo use only. Performance may vary.
 
-Want full power? Tap *View Access Plans* to upgrade.
-  `;
-  await ctx.reply(freeAccess, { parse_mode: "Markdown" });
+To find better tools, tap *Browse VPN & Proxy Tools*.`,
+    { parse_mode: "Markdown" }
+  );
 });
 
 // Contact support
 bot.action("contact_support", async (ctx) => {
   await ctx.answerCbQuery();
   await ctx.reply(
-    `📞 *Need Help?*  
-Message our support team here: @TrevorDev`
+    `📬 *Need Assistance?*
+
+Reach out to our team directly:  
+👉 @TrevorDev`
   );
 });
+
 
 // Webhook handler
 export default async (req: VercelRequest, res: VercelResponse) => {
