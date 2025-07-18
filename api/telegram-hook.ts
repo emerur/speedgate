@@ -36,8 +36,10 @@ Ready to browse without borders? Get today's list below
       parse_mode: "Markdown",
       reply_markup: {
         inline_keyboard: [
-          [{ text: "Get Today's Socks5", callback_data: "socks_5" }],
-          [{ text: "Get Today's Socks4", callback_data: "socks_4" }],
+          [{ text: "Get Socks5 list", callback_data: "socks_5" }],
+          [{ text: "Get Socks4 list", callback_data: "socks_4" }],
+          [{ text: "Get Socks5 list", callback_data: "socks_5" }],
+          [{ text: "Get Socks4 list", callback_data: "socks_4" }],
         ],
       },
     });
@@ -52,7 +54,7 @@ bot.action("socks_5", async (ctx) => {
   await ctx.answerCbQuery();
   await ctx.replyWithDocument({
     url: "https://github.com/emerur/unlimited_bot/blob/main/socks5.txt", // Replace with your actual file URL
-    filename: "Today's socks5", // Optional: custom filename
+    filename: "Socks5", // Optional: custom filename
   });
 });
 // Socks 4
@@ -60,7 +62,7 @@ bot.action("socks_4", async (ctx) => {
   await ctx.answerCbQuery();
   await ctx.replyWithDocument({
     url: "https://github.com/emerur/unlimited_bot/blob/main/socks4.txt", // Replace with your actual file URL
-    filename: "Today's socks4", // Optional: custom filename
+    filename: "Socks4", // Optional: custom filename
   });
 });
 
