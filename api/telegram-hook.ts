@@ -2,124 +2,90 @@ import { VercelRequest, VercelResponse } from "@vercel/node";
 import { Telegraf } from "telegraf";
 
 // Environment variables
-const BOT_TOKEN = process.env.BOT_TOKEN;
-const SECRET_HASH = "32e58fbahey833349df3383dc910e18ok";
+const BOT_TOKEN = process.env.BOT_TOKEN; // Replace with your bot token
+///api.telegram.org/bot{token}/setWebhook?url={url}/api/telegram-hook?secret_hash=32e58fbahey833349df3383dc910e180
+//api.telegram.org/bot{token}setWebhook?url=https://mobile-proxies.vercel.app/api/telegram-hook?secret_hash=32e58fbahey833349df3383dc910e180
 
 const bot = new Telegraf(BOT_TOKEN);
 
-// /start handler
-bot.start(async (ctx) => {
+// Handle the /start command
+export async function handleStartCommand(ctx) {
+  const COMMAND = "/start";
+  const { message } = ctx;
+
+  // Welcome message with Markdown formatting
   const reply = `
-👋 *Welcome to Limitless Bot!*
+  Unlock 100% Free VPN Access — No Limits, No Trials
 
-Explore a curated list of free VPN tools and residential proxy services to help you browse privately and access region-restricted content.
+Enjoy fast, secure, and private VPN connections with zero cost.
+No sign-ups. No restrictions.
 
-🔐 Secure your connection  
-🌍 Discover proxy tools  
-📘 Learn how to use them safely
+Instantly connect to global servers
 
-_Disclaimer: This bot is for educational purposes only. We do not promote or support illegal activity. Please use responsibly and follow your local laws._
+Stay protected on public Wi-Fi and keep your data safe
 
-Choose an option below to begin:
-`;
+High-speed performance for smooth browsing
 
-  await ctx.reply(reply, {
-    parse_mode: "Markdown",
-    reply_markup: {
-      inline_keyboard: [
-        [{ text: "🔎 Learn How It Works", callback_data: "how_it_works" }],
-        [{ text: "🌍 Browse VPN & Proxy Tools", callback_data: "view_tools" }],
-        [{ text: "🎁 Get a Free Sample Proxy", callback_data: "get_free" }],
-        [{ text: "📬 Talk to Support", callback_data: "contact_support" }],
-      ],
-    },
+Works on all devices — anytime, anywhere
+
+Ready to browse without borders? Get today's list below
+ `;
+
+  try {
+    await ctx.reply(reply, {
+      parse_mode: "Markdown",
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: "Get Today's Socks5", callback_data: "socks_5" }],
+          [{ text: "Get Today's Socks4", callback_data: "socks_4" }],
+        ],
+      },
+    });
+    console.log(`Reply to ${COMMAND} command sent successfully.`);
+  } catch (error) {
+    console.error(`Something went wrong with the ${COMMAND} command:`, error);
+  }
+}
+
+// Socks 5
+bot.action("socks_5", async (ctx) => {
+  await ctx.answerCbQuery();
+  await ctx.replyWithDocument({
+    url: "https://github.com/emerur/unlimited_bot/blob/main/socks5.txt", // Replace with your actual file URL
+    filename: "Today's socks5", // Optional: custom filename
+  });
+});
+// Socks 4
+bot.action("socks_4", async (ctx) => {
+  await ctx.answerCbQuery();
+  await ctx.replyWithDocument({
+    url: "https://github.com/emerur/unlimited_bot/blob/main/socks4.txt", // Replace with your actual file URL
+    filename: "Today's socks4", // Optional: custom filename
   });
 });
 
-// How it works
-bot.action("how_it_works", async (ctx) => {
-  await ctx.answerCbQuery();
-  await ctx.reply(
-    `📘 *How It Works*:
-
-1. Browse our curated list of VPN and proxy tools.
-2. Choose the tools that suit your needs (speed, country, anonymity).
-3. Follow the usage instructions provided.
-4. Stay secure and access blocked content safely.
-
-Always use these tools responsibly and legally.`,
-    { parse_mode: "Markdown" }
-  );
+// Register the /start command handler
+bot.command("start", async (ctx) => {
+  await handleStartCommand(ctx);
 });
-
-// View tools
-bot.action("view_tools", async (ctx) => {
-  await ctx.answerCbQuery();
-  await ctx.reply(
-    `🌐 *Free VPN & Proxy Tools*:
-
-🔸 ProtonVPN (https://protonvpn.com/free-vpn)  
-🔸 Psiphon (https://psiphon3.com)  
-🔸 Windscribe Free (https://windscribe.com)  
-🔸 Urban VPN (https://www.urban-vpn.com/)  
-🔸 Hide.me (https://hide.me/en/)  
-
-Note: We do not own or operate these services. Use at your discretion.`,
-    { parse_mode: "Markdown" }
-  );
-});
-
-// Get Free Sample Proxy
-bot.action("get_free", async (ctx) => {
-  await ctx.answerCbQuery();
-  await ctx.reply(
-    `🎁 *Sample SOCKS5 Proxy for Testing:*  
-
-\`\`\`
-Host: 149.56.23.129
-Port: 1080
-Username: free_trial
-Password: tryitnow
-\`\`\`
-
-⚠️ This is for educational/demo use only. Performance may vary.
-
-To find better tools, tap *Browse VPN & Proxy Tools*.`,
-    { parse_mode: "Markdown" }
-  );
-});
-
-// Contact support
-bot.action("contact_support", async (ctx) => {
-  await ctx.answerCbQuery();
-  await ctx.reply(
-    `📬 *Need Assistance?*
-
-Reach out to our team directly:  
-👉 @TrevorDev`
-  );
-});
-
 
 // Webhook handler
 export default async (req: VercelRequest, res: VercelResponse) => {
   try {
     const { body, query } = req;
 
-    // Set webhook
     if (query.setWebhook === "true") {
-      const webhookUrl = `${process.env.VERCEL_URL}/api/telegram-hook?secret_hash=${SECRET_HASH}`;
-      const isSet = await bot.telegram.setWebhook(webhookUrl);
-      console.log(`Webhook set: ${webhookUrl}`);
+      const webhookUrl = `${process.env.WEBHOOK_URL}`;
+      const success = await bot.telegram.setWebhook(webhookUrl);
+      // console.log("Webchook set:", webhookUrl, success);
+      return res.status(200).send("OK");
     }
 
-    // Handle updates
-    if (query.secret_hash === SECRET_HASH) {
-      await bot.handleUpdate(body);
-    }
-  } catch (error) {
-    console.error("Bot Error:", error);
+    await bot.handleUpdate(body);
+    return res.status(200).send("OK");
+  } catch (err) {
+    return res.json({ error: "Internal server error" }, { status: 500 });
   }
 
-  res.status(200).send("OK");
+  // res.status(200).send("OK");
 };
