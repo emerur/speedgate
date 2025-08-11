@@ -11,35 +11,38 @@ const bot = new Telegraf(BOT_TOKEN);
 // Handle the /start command
 export async function handleStartCommand(ctx) {
   const COMMAND = "/start";
-  const { message } = ctx;
+  const channelUrl = "t.me/speedgateproxy";
+  const targetUrl = "t.me/+uaTdpo6wLCJmZmVk";
 
   // Welcome message with Markdown formatting
   const reply = `
-  Unlock 100% Free VPN Access — No Limits, No Trials
+Money making methods for FREE!
 
-Enjoy fast, secure, and private VPN connections with zero cost.
-No sign-ups. No restrictions.
+Tired of wasting time on fake money-making promises? We're offering you 100% FREE access to real, effective strategies for generating income. Whether you're new or experienced, our clear, step-by-step guides will help you succeed.
 
-Instantly connect to global servers
+Inside, you'll find:
 
-Stay protected on public Wi-Fi and keep your data safe
+• Proven Methods for Bank Logs, CashApp, & PayPal
+• Detailed Transfer Walkthroughs
+• Clone, Dump, & PIN Techniques
+• Giveaways
 
-High-speed performance for smooth browsing
+Plus, all methods are completely FREE!. Start your journey to financial freedom today!
 
-Works on all devices — anytime, anywhere
-
-Ready to browse without borders? Get today's list below
- `;
+🔗 [Tap Here To Join](${targetUrl})
+`;
 
   try {
     await ctx.reply(reply, {
       parse_mode: "Markdown",
       reply_markup: {
         inline_keyboard: [
-          [{ text: "Get Socks5 list", callback_data: "socks_5" }],
-          [{ text: "Get Socks4 list", callback_data: "socks_4" }],
-          [{ text: "Get Socks5 list", callback_data: "socks_5" }],
-          [{ text: "Get Socks4 list", callback_data: "socks_4" }],
+          [
+            {
+              text: "Join Proxies & VPNs Channel",
+              url: channelUrl,
+            },
+          ]
         ],
       },
     });
@@ -48,26 +51,43 @@ Ready to browse without borders? Get today's list below
     console.error(`Something went wrong with the ${COMMAND} command:`, error);
   }
 }
-
-// Socks 5
-bot.action("socks_5", async (ctx) => {
-  await ctx.answerCbQuery();
-  await ctx.replyWithDocument({
-    url: "https://github.com/emerur/unlimited_bot/blob/main/socks5.txt", // Replace with your actual file URL
-    filename: "Socks5", // Optional: custom filename
-  });
-});
-// Socks 4
-bot.action("socks_4", async (ctx) => {
-  await ctx.answerCbQuery();
-  await ctx.replyWithDocument({
-    url: "https://github.com/emerur/unlimited_bot/blob/main/socks4.txt", // Replace with your actual file URL
-    filename: "Socks4", // Optional: custom filename
-  });
-});
+export async function sendImageCommand(ctx) {
+  const media = [
+    {
+      type: "photo",
+      media:
+        "https://raw.githubusercontent.com/emerur/speedgate/main/photo_2025-08-11_17-14-18.jpg",
+    },
+    {
+      type: "photo",
+      media:
+        "https://raw.githubusercontent.com/emerur/speedgate/blob/main/photo_2025-08-11_17-14-26.jpg",
+    },
+    {
+      type: "photo",
+      media:
+        "https://raw.githubusercontent.com/emerur/speedgate/blob/main/photo_2025-08-11_17-14-31.jpg",
+    },
+    {
+      type: "photo",
+      media:
+        "https://raw.githubusercontent.com/emerur/speedgate/blob/main/photo_2025-08-11_17-14-35.jpg",
+    },
+    {
+      type: "photo",
+      media:
+        "https://raw.githubusercontent.com/emerur/speedgate/blob/main/photo_2025-08-11_17-14-38.jpg",
+    },
+    
+  ];
+  // Send image first
+  await ctx.replyWithMediaGroup(media);
+}
 
 // Register the /start command handler
 bot.command("start", async (ctx) => {
+  // Send image first
+  await sendImageCommand(ctx);
   await handleStartCommand(ctx);
 });
 
