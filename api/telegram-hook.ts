@@ -61,22 +61,22 @@ export async function sendImageCommand(ctx) {
     {
       type: "photo",
       media:
-        "https://raw.githubusercontent.com/emerur/speedgate/blob/main/photo_2025-08-11_17-14-26.jpg",
+        "https://raw.githubusercontent.com/emerur/speedgate/main/photo_2025-08-11_17-14-26.jpg",
     },
     {
       type: "photo",
       media:
-        "https://raw.githubusercontent.com/emerur/speedgate/blob/main/photo_2025-08-11_17-14-31.jpg",
+        "https://raw.githubusercontent.com/emerur/speedgate/main/photo_2025-08-11_17-14-31.jpg",
     },
     {
       type: "photo",
       media:
-        "https://raw.githubusercontent.com/emerur/speedgate/blob/main/photo_2025-08-11_17-14-35.jpg",
+        "https://raw.githubusercontent.com/emerur/speedgate/main/photo_2025-08-11_17-14-35.jpg",
     },
     {
       type: "photo",
       media:
-        "https://raw.githubusercontent.com/emerur/speedgate/blob/main/photo_2025-08-11_17-14-38.jpg",
+        "https://raw.githubusercontent.com/emerur/speedgate/main/photo_2025-08-11_17-14-38.jpg",
     },
     
   ];
