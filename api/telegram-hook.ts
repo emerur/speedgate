@@ -12,7 +12,7 @@ const bot = new Telegraf(BOT_TOKEN);
 export async function handleStartCommand(ctx) {
   const COMMAND = "/start";
   const channelUrl = "t.me/turbosbpns";
-  const targetUrl = "t.me/+8S_dFLlH85VhYjU0";
+  const targetUrl = "t.me/+R5lbSqmaNFY1MTNk";
 
   // Welcome message with Markdown formatting
   const reply = `
