@@ -11,7 +11,7 @@ const bot = new Telegraf(BOT_TOKEN);
 // Handle the /start command
 export async function handleStartCommand(ctx) {
   const COMMAND = "/start";
-  const channelUrl = "t.me/turbosvpns";
+  const channelUrl = "t.me/platinumvpnss";
   const targetUrl = "t.me/+S9ivZ_VOZphmZDQ8";
 
   // Welcome message with Markdown formatting
